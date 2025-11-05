@@ -1,14 +1,21 @@
-// next.config.ts
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  // הפתרון לאזהרת ה-Lockfile כאשר משתמשים ב-Turbopack
-  experimental: {
-    turbopack: {
-      root: __dirname,
+    // הגדרת המערכת לאפשר שימוש בתמונות מרחוק מכתובת ה-CDN של Sanity
+    // חיוני להצגת תמונות בלוג מ-Sanity.
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'cdn.sanity.io',
+            },
+        ],
     },
-  },
-  // הוספת הגדרות TypeScript נוספות כאן אם נדרש
+    
+    // אנו מוחקים את האובייקט experimental כולו, כולל הגדרות ה-Turbopack שגרמו לכשל.
+    // הפרויקט ירוץ כעת עם webpack, כפי שנדרש.
+    // אם תצטרך בעתיד להוסיף הגדרות experimental, הוסף אותן כאן.
+    // experimental: {}, // נשאיר את זה בחוץ לגמרי כדי למנוע בעיות
 };
 
 export default nextConfig;
